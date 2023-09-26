@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int contaDigitos(int numero)
-{ // add uma nova função e um do...while
+int contaDigitos(int numero) { // Função responsavel pela checagem da senha.
   int contador = 0;
 
   while (numero != 0)
