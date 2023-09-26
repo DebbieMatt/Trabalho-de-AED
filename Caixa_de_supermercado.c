@@ -6,7 +6,7 @@ int compra() {
   int item, quant;
   float var, preco;
   char opcao;
-  
+  // teste 1
   do{
   printf("Por favor digite o item de nossa nosso supermercado, que deseja "
          "levar : ");
