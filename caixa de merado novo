@@ -1,0 +1,88 @@
+#include <stdio.h>
+
+int estoque[10];
+float divida_cliente[10];
+
+void compra()
+{
+  int item, quant, cliente;
+
+  do
+  {
+    printf("Por favor digite o item de nossa nosso supermercado, que deseja levar : ");
+    printf("Caso queira finalizar a compra digite 0");
+    scanf("%d", &item);
+
+    if (item == 0)
+    {
+      break;
+    }
+
+    printf("Digite a quantidade: ");
+    scanf("%d", &quant);
+
+    printf("Digite o codigo do cliente: ");
+    scanf("%d", &cliente);
+
+    switch (item)
+    {
+    case 0:
+      verifica_estoque();
+      if (quant >= 3)
+      {
+        
+      }
+      else
+      {
+
+      }
+      break;
+
+    default:
+      break;
+    }
+  } while (item != 0);
+}
+
+int main()
+{
+  int codigo_menu;
+
+  do
+  {
+    printf("\n1 simular compra");
+    printf("\n2 consultar debitos de clientes do crediario");
+    printf("\n3 preencher estoque");
+    printf("\n4 pagar debitos de clientes do cediario (total ou parcial)");
+    printf("\n5 sortear um cliente que tera sua dívida do crediário perdoada");
+    printf("\n-1 codigo de parada ");
+    printf("\nDigite sua opcão: ");
+    scanf("%d", &codigo_menu);
+
+    if (codigo_menu == -1)
+    {
+      break;
+    }
+    switch (codigo_menu)
+    {
+    case 1:
+      compra();
+      break;
+
+    default:
+      break;
+    }
+
+  } while (codigo_menu != -1);
+
+  return 0;
+}
+
+/*tabela
+-1 break
+1 simular compra
+2 consultar debitos de clientes do crediario
+3 preencher estoque
+4 pagar debitos de clientes do cediario (total ou parcial)
+5 sortear um cliente que tera sua dívida do crediário perdoada
+*/
