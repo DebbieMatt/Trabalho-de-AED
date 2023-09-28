@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "compra.h"
-#include "contaDigitos.h"
 
 int main () { // CADASTRO DE SENHA, PAGAMENTO E EXTRATO NO CREDIARIO
     
