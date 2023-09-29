@@ -8,9 +8,8 @@ float divida_cliente[10];
 
 void perdoar_divida()
 {
-    int cliente_sorteado, i, v;
-
-    divida_cliente[i] += v; 
+    int cliente_sorteado;
+     
     do
     {
         srand(time(0));
