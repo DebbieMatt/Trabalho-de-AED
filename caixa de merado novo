@@ -3,6 +3,14 @@
 int estoque[10];
 float divida_cliente[10];
 
+void consultar_estoque()
+{
+    int item;
+    printf("Qual item deseja ver: ");
+    scanf("%d", &item);
+
+    printf("\nEstoque: %d", estoque[item]);
+}
 void diminui_estoque(int item, int quantidade)
 {
     estoque[item] -= quantidade;
@@ -59,6 +67,8 @@ void compra()
 
         if (retorno_estoque == 1)
         {
+            // falta completar as opcoes de compra
+            
             switch (item)
             {
             case 0:
@@ -96,8 +106,35 @@ void compra()
     printf("\n2 Cartao credito ou debito");
     printf("\n3 Dinheiro");
     printf("\n4 crediario");
-    printf("Qual o metodo de pagamento: ");
-    scanf("%d", &metodo_de_pagamento);
+
+
+// falta completar as opcoes de pagamento a baixo
+
+
+    do
+    {
+        printf("\nQual o metodo de pagamento: ");
+        scanf("%d", &metodo_de_pagamento);
+        switch (metodo_de_pagamento)
+        {
+        case 1: // pix 5% desconto
+            valor_total = valor_total * 0.95;
+            break;
+        case 2: // cartao credito/debito
+            break;
+        case 3: // dinheiro
+            break;
+        case 4: // crediario
+            printf("Digite o codigo do cliente: ");
+            scanf("%d", &cliente);
+
+            divida_cliente[cliente] = divida_cliente[cliente] + valor_total;
+        default:
+        printf("\nOpcao de pagamento invalida.");
+            break;
+        }
+    } while ((metodo_de_pagamento != 1) || (metodo_de_pagamento != 2) || (metodo_de_pagamento != 3) || (metodo_de_pagamento != 4)); // para garantir q o valor será pago
+    printf("Pagamento efetuado com sucesso.");
 }
 
 int main()
@@ -133,7 +170,9 @@ int main()
         case 3:
             prencher_estoque();
             break;
-
+        case 4:
+            consultar_estoque();
+            break;
         default:
             break;
         }
