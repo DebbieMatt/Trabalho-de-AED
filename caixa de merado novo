@@ -323,7 +323,7 @@ int main()
         printf("\n4 - consultar estoque"); // feito
         printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");
         printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // incompleto
-        printf("\n(-1 codigo de parada) "); // feito
+        printf("\n(-1 codigo de parada)"); // feito
         printf("\nDigite sua opcão: ");
         scanf("%d", &codigo_menu);
 
