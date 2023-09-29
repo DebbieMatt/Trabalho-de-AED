@@ -1,8 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int estoque[10];
 float divida_cliente[10];
 
+
+void perdoar_divida()
+{
+    int cliente_sorteado, i, v;
+
+    divida_cliente[i] += v; 
+    do
+    {
+        srand(time(0));
+        cliente_sorteado = rand()%10;
+        printf("Numero sorteado: %d", cliente_sorteado);
+
+        if (divida_cliente[cliente_sorteado] != 0) // se ele tiver divida
+        {
+            divida_cliente[cliente_sorteado] = 0;
+            printf("Divida zerada. valor atual: %.2f", divida_cliente[cliente_sorteado]);
+            break;
+        }
+        else
+        {
+            printf("Cliente não possui debito.");
+        }
+    } while (divida_cliente[cliente_sorteado] = 0);
+}
 void consultar_estoque()
 {
     int item;
@@ -341,6 +367,9 @@ int main()
             break;
         case 4:
             consultar_estoque();
+            break;
+        case 6:
+            perdoar_divida();
             break;
         default:
             break;
