@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "compra.h"
 
-int main () { // CADASTRO DE SENHA, PAGAMENTO E EXTRATO NO CREDIARIO
+int main () { // PAGAMENTO E EXTRATO NO CREDIARIO
     
     compra();
 
