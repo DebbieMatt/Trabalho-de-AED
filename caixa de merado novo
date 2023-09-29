@@ -67,7 +67,7 @@ void compra()
 
         if (retorno_estoque == 1)
         {
-            // falta completar as opcoes de compra
+            // completo as opcoes de compra
             
             switch (item)
             {
@@ -264,13 +264,13 @@ void compra()
     } while (item != -1);
 
     // metodo de pagamento
-    printf("\nSendo 1 pix");
-    printf("\n2 Cartao credito ou debito");
-    printf("\n3 Dinheiro");
-    printf("\n4 crediario");
+    printf("\nDigite 1 - pix");
+    printf("\nDigite 2 - Cartao credito ou debito");
+    printf("\nDigite 3 - Dinheiro");
+    printf("\nDigite 4 - Crediario");
 
 
-// falta completar as opcoes de pagamento a baixo
+// completo as opcoes de pagamento a baixo
 
 
     do
@@ -283,10 +283,16 @@ void compra()
             valor_total = valor_total * 0.95;
             printf("Valor a pagar: %.2f", valor_total);
             break;
+
         case 2: // cartao credito/debito
+            printf("Valor a pagar: %.2f", valor_total);
             break;
+
         case 3: // dinheiro
+            valor_total = valor_total * 0.98;
+            printf("Valor a pagar: %.2f", valor_total);
             break;
+
         case 4: // crediario
             printf("Digite o codigo do cliente: ");
             scanf("%d", &cliente);
@@ -311,13 +317,13 @@ int main()
 
     do
     {
-        printf("\n1 simular compra"); // incompleto
-        printf("\n2 consultar debitos de clientes do crediario");
-        printf("\n3 preencher estoque"); // feito
-        printf("\n 4 consultar estoque"); // feito
-        printf("\n5 pagar debitos de clientes do cediario (total ou parcial)");
-        printf("\n6 sortear um cliente que tera sua dívida do crediário perdoada"); // incompleto
-        printf("\n-1 codigo de parada "); // feito
+        printf("\n1 - simular compra"); // completo
+        printf("\n2 - consultar debitos de clientes do crediario");
+        printf("\n3 - preencher estoque"); // feito
+        printf("\n4 - consultar estoque"); // feito
+        printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");
+        printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // incompleto
+        printf("\n(-1 codigo de parada) "); // feito
         printf("\nDigite sua opcão: ");
         scanf("%d", &codigo_menu);
 
