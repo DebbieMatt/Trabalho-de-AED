@@ -3,13 +3,14 @@
 int estoque[10];
 float divida_cliente[10];
 
+
 void consultar_estoque()
 {
     int item;
-    printf("Qual item deseja ver: ");
+    printf("\n Qual item deseja ver: ");
     scanf("%d", &item);
 
-    printf("\nEstoque: %d", estoque[item]);
+    printf("\nEstoque: %d \n", estoque[item]);
 }
 void diminui_estoque(int item, int quantidade)
 {
@@ -26,20 +27,20 @@ int verifica_estoque(int item, int quantidade)
         return 0;
     }
 }
-void prencher_estoque()
-{
+void prencher_estoque(){
     int item, quant;
 
-    printf("Qual item deseja preencher: ");
+    printf("\nQual item deseja preencher: ");
     scanf("%d", &item);
 
-    printf("Qual a quantidade deseja aumentar: ");
+    printf("\nQual a quantidade deseja aumentar: ");
     scanf("%d", &quant);
 
     printf("\nEstoque antigo: %d", estoque[item]);
     estoque[item] += quant;
-    printf("\nNovo estoque atualizado: %d", estoque[item]);
+    printf("\nNovo estoque atualizado: %d \n", estoque[item]);
 }
+
 void compra()
 {
     int item, quant, cliente, retorno_estoque, metodo_de_pagamento;
@@ -49,7 +50,7 @@ void compra()
     do
     {
         printf("Por favor digite o item de nossa nosso supermercado, que deseja levar: ");
-        printf("\nCaso queira finalizar a compra digite -1: ");
+        printf("\n(Caso queira finalizar a compra digite -1) ");
         scanf("%d", &item);
 
         if (item == -1)
@@ -63,7 +64,7 @@ void compra()
         retorno_estoque = verifica_estoque(item, quant);
         // se retorno estoque = 1 é pq tem estoque disponivel
         // se retorno estoque = 0 nao tem estoque disponivel
-        printf("%d", &retorno_estoque);
+        printf("%i", &retorno_estoque);
 
         if (retorno_estoque == 1)
         {
@@ -291,6 +292,7 @@ void compra()
         case 3: // dinheiro
             valor_total = valor_total * 0.98;
             printf("Valor a pagar: %.2f", valor_total);
+            valor_total = 0;
             break;
 
         case 4: // crediario
@@ -298,13 +300,16 @@ void compra()
             scanf("%d", &cliente);
 
             divida_cliente[cliente] = divida_cliente[cliente] + valor_total;
+            valor_total = 0;
+            break;
         default:
         printf("\nOpcao de pagamento invalida.");
             break;
         }
-    } while ((metodo_de_pagamento != 1) || (metodo_de_pagamento != 2) || (metodo_de_pagamento != 3) || (metodo_de_pagamento != 4)); // para garantir q o valor será pago
+    } while ( valor_total != 0); // para garantir q o valor será pago
     printf("Pagamento efetuado com sucesso.");
 }
+
 
 int main()
 {
@@ -312,7 +317,7 @@ int main()
     for (int i = 0; i < 10; i++) // para zerar os vetores e eles nao comecarem com lixo de memoria
     {
         divida_cliente[i] = 0;
-        estoque[i] = 0;
+        estoque[i] = 5; // zerar depois
     }
 
     do
@@ -320,7 +325,7 @@ int main()
         printf("\n1 - simular compra"); // completo
         printf("\n2 - consultar debitos de clientes do crediario");
         printf("\n3 - preencher estoque"); // feito
-        printf("\n4 - consultar estoque"); // feito
+        printf("\n4 - consultar estoque (estoque inicia vazio)"); // feito
         printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");
         printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // incompleto
         printf("\n(-1 codigo de parada)"); // feito
