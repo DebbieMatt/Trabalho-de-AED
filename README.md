@@ -18,3 +18,5 @@ Utilizando vetores e funções/procedimentos, o programa deve ser capaz de:
 7. Sortear aleatoriamente um cliente para perdoar a sua dívida com o mercado.
 
 É obrigatório: implementar um desconto para compras no atacado, [TABELA](https://github.com/DebbieMatt/Trabalho-de-AED/blob/a0fcc911ff5e4b85a132d8899a734875f1b89b92/tabela%20pre%C3%A7o.pdf). 
+
+Descrição detalhada sobre o projeto: [Especificações](https://github.com/DebbieMatt/Trabalho-de-AED/blob/d686341ba760d82f0cb46b7a0e54c9432a6c249f/Descri%C3%A7%C3%A3o%20do%20trabalho.pdf).
