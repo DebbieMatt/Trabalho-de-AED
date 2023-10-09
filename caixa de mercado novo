@@ -104,7 +104,7 @@ void compra()
         retorno_estoque = verifica_estoque(item, quant);
         // se retorno estoque = 1 é pq tem estoque disponivel
         // se retorno estoque = 0 nao tem estoque disponivel
-        printf("%d", &retorno_estoque);
+        printf("%.1ls", &retorno_estoque);
 
         if (retorno_estoque == 1)
         {
