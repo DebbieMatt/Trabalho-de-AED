@@ -27,14 +27,15 @@ void perdoar_divida()
 
         if (divida_cliente[cliente_sorteado] != 0) // se ele tiver divida
         {
+            printf("\nDivida anterior: %.2f", divida_cliente[cliente_sorteado]);
             divida_cliente[cliente_sorteado] = 0;
             cliente_tem_debito = 0;
-            printf("Divida zerada. valor atual: %.2f", divida_cliente[cliente_sorteado]);
+            printf("\nDivida zerada. valor atual: %.2f", divida_cliente[cliente_sorteado]);
             break;
         }
         else
         {
-            printf("Cliente não possui debito.");
+            printf("\nCliente não possui debito.");
         }
     } while (cliente_tem_debito == 1);
 }
@@ -103,7 +104,7 @@ void compra()
         retorno_estoque = verifica_estoque(item, quant);
         // se retorno estoque = 1 é pq tem estoque disponivel
         // se retorno estoque = 0 nao tem estoque disponivel
-        printf("%i", &retorno_estoque);
+        printf("%d", &retorno_estoque);
 
         if (retorno_estoque == 1)
         {
@@ -346,7 +347,33 @@ void compra()
             break;
         }
     } while (valor_total != 0); // para garantir q o valor será pago
-    printf("Pagamento efetuado com sucesso.");
+    printf("\nPagamento efetuado com sucesso.");
+}
+
+void pagar_debito_crediario()
+{
+    int codigo_cliente;
+    float valor;
+    printf("digite o codigo do cliente: ");
+    scanf("%d", &codigo_cliente);
+
+    printf("digite o valor que deseja pagar: ");
+    scanf("%f", &valor);
+
+    if (divida_cliente[codigo_cliente] == 0) // se o cliente não deve nada
+    {
+        printf("\ncliente não tem divida");
+    }
+    else if (divida_cliente[codigo_cliente] < valor) // se o cliente quis pagar mais do que sua divida
+    {
+        printf("\nvalor a pagar maior do que a divida atual");
+    }
+    else if ((divida_cliente[codigo_cliente] > 0) && (divida_cliente[codigo_cliente] >= valor)) // valor possivel de pagar
+    {
+        printf("\nÉ possível pagar sua divida. Divida anterior: %.2f", divida_cliente[codigo_cliente]);
+        divida_cliente[codigo_cliente] -= valor;
+        printf("\nDivida atual: %.2f", divida_cliente[codigo_cliente]);
+    }
 }
 
 int main()
@@ -354,18 +381,18 @@ int main()
     int codigo_menu;
     for (int i = 0; i < 10; i++) // para zerar os vetores e eles nao comecarem com lixo de memoria
     {
-        divida_cliente[i] = 0;
-        estoque[i] = 5; // zerar depois
+        divida_cliente[i] = 2; // zerar depois
+        estoque[i] = 5;        // zerar depois
     }
 
     do
     {
-        printf("\n1 - simular compra"); // completo
-        printf("\n2 - consultar debitos de clientes do crediario"); // feito
-        printf("\n3 - preencher estoque");                        // feito
-        printf("\n4 - consultar estoque (estoque inicia vazio)"); // feito
-        printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");
-        printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // incompleto
+        printf("\n1 - simular compra");                                               // completo
+        printf("\n2 - consultar debitos de clientes do crediario");                   // feito
+        printf("\n3 - preencher estoque");                                            // feito
+        printf("\n4 - consultar estoque");                                            //(estoque inicia vazio)               // feito
+        printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");     // feito
+        printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // feito
         printf("\n(-1 codigo de parada)");                                            // feito
         printf("\nDigite sua opcão: ");
         scanf("%d", &codigo_menu);
@@ -387,6 +414,9 @@ int main()
             break;
         case 4:
             consultar_estoque();
+            break;
+        case 5:
+            pagar_debito_crediario();
             break;
         case 6:
             perdoar_divida();
