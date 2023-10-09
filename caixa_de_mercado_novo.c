@@ -104,7 +104,7 @@ void compra()
         retorno_estoque = verifica_estoque(item, quant);
         // se retorno estoque = 1 é pq tem estoque disponivel
         // se retorno estoque = 0 nao tem estoque disponivel
-        printf("%.1ls", &retorno_estoque);
+        //printf("%d", &retorno_estoque);
 
         if (retorno_estoque == 1)
         {
@@ -390,7 +390,7 @@ int main()
         printf("\n1 - simular compra");                                               // completo
         printf("\n2 - consultar debitos de clientes do crediario");                   // feito
         printf("\n3 - preencher estoque");                                            // feito
-        printf("\n4 - consultar estoque");                                            //(estoque inicia vazio)               // feito
+        printf("\n4 - consultar estoque");     //(estoque inicia vazio)               // feito
         printf("\n5 - pagar debitos de clientes do cediario (total ou parcial)");     // feito
         printf("\n6 - sortear um cliente que tera sua dívida do crediário perdoada"); // feito
         printf("\n(-1 codigo de parada)");                                            // feito
