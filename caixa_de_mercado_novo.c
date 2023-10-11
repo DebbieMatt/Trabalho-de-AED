@@ -9,16 +9,17 @@ void consultar_debitos()
 {
     int cliente;
 
-    printf("Digite  o codigo do cliente: ");
+    printf("\nDigite  o codigo do cliente: ");
+    printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &cliente);
     if ((cliente >= 0) && (cliente < 10)) // se ele digitar um vetor valido
     {
-        printf(" Voce digitou um codigo valido. ");
+        printf("Voce digitou um codigo valido. ");
         printf("Divida do cliente %d = R$%.2f ", cliente, divida_cliente[cliente]);
     }
     else
     {
-        printf(" Voce nao digitou um codigo valido. ");
+        printf("Voce nao digitou um codigo valido. ");
     }
 }
 
@@ -30,7 +31,7 @@ void perdoar_divida()
     {
         srand(time(0));
         cliente_sorteado = rand() % 10;
-        printf("Numero sorteado: %d", cliente_sorteado);
+        printf("\nNumero sorteado: %d", cliente_sorteado);
 
         if (divida_cliente[cliente_sorteado] != 0) // se ele tiver divida
         {
@@ -51,16 +52,17 @@ void consultar_estoque()
 {
     int item;
     printf("\n Qual item deseja ver: ");
+    printf("(se deseja cancelar digite um codigo invalido)");
     scanf("%d", &item);
 
     if ((item >= 0) && (item < 10)) // se ele digitar um vetor valido
     {
-        printf(" Voce digitou um codigo valido. ");
+        printf("Voce digitou um codigo valido. ");
         printf("\nEstoque: %d \n", estoque[item]);
     }
     else
     {
-        printf(" Voce nao digitou um codigo valido. ");
+        printf("Voce nao digitou um codigo valido. ");
     }
 }
 
@@ -85,12 +87,13 @@ void prencher_estoque()
 {
     int item, quant;
 
-    printf("\nQual item deseja preencher: ");
+    printf("\nQual item deseja preencher:\n ");
+    printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &item);
 
     if ((item >= 0) && (item < 10)) // se ele digitar um vetor valido
     {
-        printf(" Voce digitou um codigo valido. ");
+        printf("Voce digitou um codigo valido. ");
 
         printf("\nQual a quantidade deseja aumentar: ");
         scanf("%d", &quant);
@@ -101,7 +104,7 @@ void prencher_estoque()
     }
     else
     {
-        printf(" Voce nao digitou um codigo valido. ");
+        printf("Voce nao digitou um codigo valido. ");
     }
 }
 
@@ -374,6 +377,7 @@ void compra()
             {
                 printf(" Voce digitou um codigo valido. ");
                 divida_cliente[cliente] = divida_cliente[cliente] + valor_total;
+                printf("Divida atual do cliente %d: R$%.2f", cliente, divida_cliente[cliente]);
                 valor_total = 0;
             }
             else
@@ -394,7 +398,8 @@ void pagar_debito_crediario()
 {
     int codigo_cliente;
     float valor;
-    printf("digite o codigo do cliente: ");
+    printf("\nDigite o codigo do cliente: \n");
+    printf("(se deseja cancelar digite um codigo invalido)");
     scanf("%d", &codigo_cliente);
 
     if ((codigo_cliente >= 0) && (codigo_cliente < 10)) // se ele digitar um vetor valido
