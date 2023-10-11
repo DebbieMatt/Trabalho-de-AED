@@ -26,7 +26,7 @@ void consultar_debitos()
 void perdoar_divida()
 {
     int cliente_sorteado, cliente_tem_debito = 1;
-
+    // fazer for
     do
     {
         srand(time(0));
@@ -138,7 +138,7 @@ void compra()
             retorno_estoque = verifica_estoque(item, quant);
             // se retorno estoque = 1 é pq tem estoque disponivel
             // se retorno estoque = 0 nao tem estoque disponivel
-            // printf("%d", &retorno_estoque);
+            //printf("%d", retorno_estoque);
 
             if (retorno_estoque == 1)
             {
@@ -434,8 +434,8 @@ int main()
     int codigo_menu;
     for (int i = 0; i < 10; i++) // para zerar os vetores e eles nao comecarem com lixo de memoria
     {
-        divida_cliente[i] = 2; // zerar depois
-        estoque[i] = 5;        // zerar depois
+        divida_cliente[i] = 0; // zerar depois
+        estoque[i] = 0;        // zerar depois
     }
 
     do
