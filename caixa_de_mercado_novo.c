@@ -8,7 +8,7 @@ float divida_cliente[10];
 void consultar_debitos()
 {
     int cliente;
-
+    printf("\n");
     printf("\nDigite  o codigo do cliente: ");
     printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &cliente);
@@ -25,34 +25,53 @@ void consultar_debitos()
 
 void perdoar_divida()
 {
-    int cliente_sorteado, cliente_tem_debito = 1;
+    int cliente_sorteado, cliente_tem_debito = 1, existe_cliente_com_divida = 0;
     // fazer for
-    do
+    for (int i = 0; i < 10; i++)
     {
-        srand(time(0));
-        cliente_sorteado = rand() % 10;
-        printf("\nNumero sorteado: %d", cliente_sorteado);
-
-        if (divida_cliente[cliente_sorteado] != 0) // se ele tiver divida
+        if (divida_cliente[i] != 0)
         {
-            printf("\nDivida anterior: %.2f", divida_cliente[cliente_sorteado]);
-            divida_cliente[cliente_sorteado] = 0;
-            cliente_tem_debito = 0;
-            printf("\nDivida zerada. valor atual: %.2f", divida_cliente[cliente_sorteado]);
-            break;
+            existe_cliente_com_divida++; // existe alguem com divida
         }
         else
         {
-            printf("\nCliente não possui debito.");
+            // nao existe ninguem com divida
         }
-    } while (cliente_tem_debito == 1);
+    }
+    if (existe_cliente_com_divida > 0) // se existir cliente com divida
+    {
+        do
+        {
+            srand(time(0));
+            cliente_sorteado = rand() % 10;
+            printf("\nNumero sorteado: %d", cliente_sorteado);
+
+            if (divida_cliente[cliente_sorteado] != 0) // se ele tiver divida
+            {
+                printf("\nDivida anterior: %.2f", divida_cliente[cliente_sorteado]);
+                divida_cliente[cliente_sorteado] = 0;
+                cliente_tem_debito = 0;
+                printf("\nDivida zerada. valor atual: %.2f", divida_cliente[cliente_sorteado]);
+                break;
+            }
+            else
+            {
+                printf("\nCliente não possui debito.");
+            }
+        } while (cliente_tem_debito == 1);
+    }
+    else
+    {
+        printf("\nNão existe clientes com divida. ");
+    }
 }
 
 void consultar_estoque()
 {
     int item;
-    printf("\n Qual item deseja ver: ");
-    printf("(se deseja cancelar digite um codigo invalido)");
+    printf("\n");
+    printf("\nQual item deseja ver: ");
+    printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &item);
 
     if ((item >= 0) && (item < 10)) // se ele digitar um vetor valido
@@ -86,7 +105,7 @@ int verifica_estoque(int item, int quantidade)
 void prencher_estoque()
 {
     int item, quant;
-
+    printf("\n");
     printf("\nQual item deseja preencher:\n ");
     printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &item);
@@ -116,6 +135,7 @@ void compra()
 
     do
     {
+        printf("\n");
         printf("\nPor favor digite o item de nossa nosso supermercado, que deseja levar: ");
         printf("\n(Caso queira finalizar a compra digite -1) ");
         scanf("%d", &item);
@@ -131,267 +151,283 @@ void compra()
         else
         {
             printf(" Voce digitou um item valido. ");
-
+            printf("\n");
             printf("Digite a quantidade: ");
             scanf("%d", &quant);
 
-            retorno_estoque = verifica_estoque(item, quant);
-            // se retorno estoque = 1 é pq tem estoque disponivel
-            // se retorno estoque = 0 nao tem estoque disponivel
-            //printf("%d", retorno_estoque);
-
-            if (retorno_estoque == 1)
+            if (quant > 0) // se digitar uma quantidade maior que 0
             {
-                // completo as opcoes de compra
+                retorno_estoque = verifica_estoque(item, quant);
+                // se retorno estoque = 1 é pq tem estoque disponivel
+                // se retorno estoque = 0 nao tem estoque disponivel
+                // printf("%d", retorno_estoque);
 
-                switch (item)
+                if (retorno_estoque == 1)
                 {
-                case 0:
+                    // completo as opcoes de compra
 
-                    if (quant >= 3) // atacado
+                    switch (item)
                     {
-                        valor_total += 1.95 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) pasta de dente(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 2.10 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) pasta de dente(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 0:
 
-                case 1:
+                        if (quant >= 3) // atacado
+                        {
+                            valor_total += 1.95 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) pasta de dente(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 2.10 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) pasta de dente(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 3) // atacado
-                    {
-                        valor_total += 8.20 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) pão hot dog(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 9.40 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) pão hot dog(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 1:
 
-                case 2:
+                        if (quant >= 3) // atacado
+                        {
+                            valor_total += 8.20 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) pão hot dog(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 9.40 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) pão hot dog(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 4) // atacado
-                    {
-                        valor_total += 4 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) yakisoba(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 4.20 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) yakisoba(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 2:
 
-                case 3:
+                        if (quant >= 4) // atacado
+                        {
+                            valor_total += 4 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) yakisoba(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 4.20 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) yakisoba(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 3) // atacado
-                    {
-                        valor_total += 4.80 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) massa de lasanha(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 5 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) massa de lasanha(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 3:
 
-                case 4:
+                        if (quant >= 3) // atacado
+                        {
+                            valor_total += 4.80 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) massa de lasanha(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 5 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) massa de lasanha(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 2) // atacado
-                    {
-                        valor_total += 19.85 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) carne de porco(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 21 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) carne de porco(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 4:
 
-                case 5:
+                        if (quant >= 2) // atacado
+                        {
+                            valor_total += 19.85 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) carne de porco(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 21 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) carne de porco(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 5) // atacado
-                    {
-                        valor_total += 5.55 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) feijão preto(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 5.99 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) feijão preto(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 5:
 
-                case 6:
+                        if (quant >= 5) // atacado
+                        {
+                            valor_total += 5.55 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) feijão preto(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 5.99 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) feijão preto(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 7) // atacado
-                    {
-                        valor_total += 2 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) ervilha (s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 2.20 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) ervilha (s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 6:
 
-                case 7:
+                        if (quant >= 7) // atacado
+                        {
+                            valor_total += 2 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) ervilha (s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 2.20 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) ervilha (s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 5) // atacado
-                    {
-                        valor_total += 3.20 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) detergente (s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 4 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) detergente (s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 7:
 
-                case 8:
+                        if (quant >= 5) // atacado
+                        {
+                            valor_total += 3.20 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) detergente (s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 4 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) detergente (s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 3) // atacado
-                    {
-                        valor_total += 10 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) caixa de chocolate(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 11 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) caixa de chocolate(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 8:
 
-                case 9:
+                        if (quant >= 3) // atacado
+                        {
+                            valor_total += 10 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) caixa de chocolate(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 11 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) caixa de chocolate(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
 
-                    if (quant >= 6) // atacado
-                    {
-                        valor_total += 4.99 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) banana(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    else // varejo
-                    {
-                        valor_total += 5.75 * quant;
-                        printf("\nVoce esta levando %i quantidade(s) banana(s). \n", quant);
-                        diminui_estoque(item, quant);
-                        printf("Lhe custara R$ %.2f \n", valor_total);
-                    }
-                    break;
+                    case 9:
 
-                default:
-                    printf("Opcao nao disponivel. ");
-                    break;
+                        if (quant >= 6) // atacado
+                        {
+                            valor_total += 4.99 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) banana(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        else // varejo
+                        {
+                            valor_total += 5.75 * quant;
+                            printf("\nVoce esta levando %i quantidade(s) banana(s). \n", quant);
+                            diminui_estoque(item, quant);
+                            printf("Lhe custara R$ %.2f \n", valor_total);
+                        }
+                        break;
+
+                    default:
+                        printf("Opcao nao disponivel. ");
+                        break;
+                    }
+                }
+                else
+                {
+                    printf("Quantidade nao disponivel no estoque. ");
                 }
             }
             else
             {
-                printf("Quantidade nao disponivel no estoque. ");
+                printf("Voce nao digitou uma quantidade valida, por favor digite uma quantidade maior que 0. ");
             }
         }
 
     } while (item != -1);
 
-    // metodo de pagamento
-    printf("\nDigite 1 - pix");
-    printf("\nDigite 2 - Cartao credito ou debito");
-    printf("\nDigite 3 - Dinheiro");
-    printf("\nDigite 4 - Crediario");
-
-    // completo as opcoes de pagamento a baixo
-
-    do
+    if (valor_total == 0)
     {
-        printf("\nQual o metodo de pagamento: ");
-        scanf("%d", &metodo_de_pagamento);
-        switch (metodo_de_pagamento)
+        printf("Não comprou nada. ");
+    }
+    else
+    {
+        // metodo de pagamento
+        printf("\n");
+        printf("\nDigite 1 - pix");
+        printf("\nDigite 2 - Cartao credito ou debito");
+        printf("\nDigite 3 - Dinheiro");
+        printf("\nDigite 4 - Crediario");
+
+        // completo as opcoes de pagamento a baixo
+
+        do
         {
-        case 1: // pix 5% desconto
-            valor_total = valor_total * 0.95;
-            printf("Valor a pagar: %.2f", valor_total);
-            valor_total = 0;
-            break;
-
-        case 2: // cartao credito/debito
-            printf("Valor a pagar: %.2f", valor_total);
-            valor_total = 0;
-            break;
-
-        case 3: // dinheiro
-            valor_total = valor_total * 0.98;
-            printf("Valor a pagar: %.2f", valor_total);
-            valor_total = 0;
-            break;
-
-        case 4: // crediario
-            printf("Digite o codigo do cliente: ");
-            scanf("%d", &cliente);
-            if ((cliente >= 0) && (cliente < 10)) // se ele digitar um vetor valido
+            printf("\n");
+            printf("\nQual o metodo de pagamento: ");
+            scanf("%d", &metodo_de_pagamento);
+            switch (metodo_de_pagamento)
             {
-                printf(" Voce digitou um codigo valido. ");
-                divida_cliente[cliente] = divida_cliente[cliente] + valor_total;
-                printf("Divida atual do cliente %d: R$%.2f", cliente, divida_cliente[cliente]);
+            case 1: // pix 5% desconto
+                valor_total = valor_total * 0.95;
+                printf("Valor a pagar: %.2f", valor_total);
                 valor_total = 0;
-            }
-            else
-            {
-                printf(" Voce nao digitou um codigo valido. ");
-            }
+                break;
 
-            break;
-        default:
-            printf("\nOpcao de pagamento invalida.");
-            break;
-        }
-    } while (valor_total != 0); // para garantir q o valor será pago
-    printf("\nPagamento efetuado com sucesso.");
+            case 2: // cartao credito/debito
+                printf("Valor a pagar: %.2f", valor_total);
+                valor_total = 0;
+                break;
+
+            case 3: // dinheiro
+                valor_total = valor_total * 0.98;
+                printf("Valor a pagar: %.2f", valor_total);
+                valor_total = 0;
+                break;
+
+            case 4: // crediario
+                printf("Digite o codigo do cliente: ");
+                scanf("%d", &cliente);
+                if ((cliente >= 0) && (cliente < 10)) // se ele digitar um vetor valido
+                {
+                    printf("Voce digitou um codigo valido. ");
+                    divida_cliente[cliente] = divida_cliente[cliente] + valor_total;
+                    printf("Divida atual do cliente %d: R$%.2f", cliente, divida_cliente[cliente]);
+                    valor_total = 0;
+                }
+                else
+                {
+                    printf(" Voce nao digitou um codigo valido. ");
+                }
+
+                break;
+            default:
+                printf("\nOpcao de pagamento invalida.");
+                break;
+            }
+        } while (valor_total != 0); // para garantir q o valor será pago
+        printf("\nPagamento efetuado com sucesso.");
+    }
 }
 
 void pagar_debito_crediario()
@@ -399,22 +435,22 @@ void pagar_debito_crediario()
     int codigo_cliente;
     float valor;
     printf("\nDigite o codigo do cliente: \n");
-    printf("(se deseja cancelar digite um codigo invalido)");
+    printf("(se deseja cancelar digite um codigo invalido) ");
     scanf("%d", &codigo_cliente);
 
     if ((codigo_cliente >= 0) && (codigo_cliente < 10)) // se ele digitar um vetor valido
     {
         printf("Voce digitou um codigo valido. ");
-        printf("\ndigite o valor que deseja pagar: ");
+        printf("\nDigite o valor que deseja pagar: ");
         scanf("%f", &valor);
 
         if (divida_cliente[codigo_cliente] == 0) // se o cliente não deve nada
         {
-            printf("\ncliente não tem divida");
+            printf("\nCliente não tem divida");
         }
         else if (divida_cliente[codigo_cliente] < valor) // se o cliente quis pagar mais do que sua divida
         {
-            printf("\nvalor a pagar maior do que a divida atual");
+            printf("\nValor a pagar maior do que a divida atual");
         }
         else if ((divida_cliente[codigo_cliente] > 0) && (divida_cliente[codigo_cliente] >= valor)) // valor possivel de pagar
         {
@@ -434,12 +470,13 @@ int main()
     int codigo_menu;
     for (int i = 0; i < 10; i++) // para zerar os vetores e eles nao comecarem com lixo de memoria
     {
-        divida_cliente[i] = 0; // zerar depois
-        estoque[i] = 0;        // zerar depois
+        divida_cliente[i] = 0; // zerar 
+        estoque[i] = 0;        // zerar 
     }
 
     do
     {
+        printf("\n");
         printf("\n1 - simular compra");                                               // completo
         printf("\n2 - consultar debitos de clientes do crediario");                   // feito
         printf("\n3 - preencher estoque");                                            // feito
