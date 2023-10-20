@@ -65,7 +65,7 @@ void perdoar_divida()
     }
     else
     {
-        printf("\nNão existe clientes com divida. ");
+        printf("\nNao existe clientes com divida. ");
     }
 }
 
@@ -371,7 +371,7 @@ void compra()
 
     if (valor_total == 0)
     {
-        printf("Não comprou nada. ");
+        printf("Nao comprou nada. ");
     }
     else
     {
