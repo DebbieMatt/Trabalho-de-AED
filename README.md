@@ -2,11 +2,8 @@
 
 ## O trabalho final da disciplina de Algoritmos e Estruturas de Dados I
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+![GitHub language count](https://img.shields.io/static/v1?label=C&message=framework&color=blue&style=for-the-badge&logo=C)
+![Status](https://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge)
 
 > Consistirá em desenvolver um programa que simule algumas atividades básicas de um caixa e crediário de um supermercado.
 
